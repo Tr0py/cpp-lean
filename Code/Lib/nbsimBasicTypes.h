@@ -16,6 +16,7 @@
 #define nbsimBasicTypes_h
 
 #include "nbsimWin32ExportHeader.h"
+#include <Eigen/Dense>
 
 /**
 * \defgroup internal internal
@@ -46,6 +47,18 @@
 //! Single namespace for all code in this package
 namespace nbsim
 {
+	class Particle
+	{
+		private:
+			Eigen::Vector3d _pos;
+			Eigen::Vector3d _vel;
+		public:
+			Particle(Eigen::Vector3d, Eigen::Vector3d);
+			~Particle() {};
+			Eigen::Vector3d getPosition();
+			Eigen::Vector3d getVelocity();
+			void integrateTimestep(Eigen::Vector3d acceleration, double timestep);
+	};
 
 } // end namespace
 

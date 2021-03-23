@@ -18,6 +18,7 @@ set(TMP_DIR ${CMAKE_BINARY_DIR}/Testing/Temporary)
 set(TEST_CASES
   nbsimBasicTest
   nbsimCommandLineArgsTest
+  nbsimSolarTest
 )
 
 foreach(_test_case ${TEST_CASES})
@@ -34,3 +35,4 @@ endforeach()
 
 add_test(NoArgs ${EXECUTABLE_OUTPUT_PATH}/nbsimBasicTest)
 add_test(1File ${EXECUTABLE_OUTPUT_PATH}/nbsimCommandLineArgsTest ${DATA_DIR}/input.txt)
+add_test(SolarTest ${EXECUTABLE_OUTPUT_PATH}/nbsimSolarTest)
