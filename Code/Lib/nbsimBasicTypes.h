@@ -17,6 +17,11 @@
 
 #include "nbsimWin32ExportHeader.h"
 #include <Eigen/Dense>
+#include <memory>
+#include <stdlib.h>
+#include <set>
+
+#define GRAV 6.674e-11
 
 /**
 * \defgroup internal internal
@@ -47,18 +52,37 @@
 //! Single namespace for all code in this package
 namespace nbsim
 {
+	/* PartA */
 	class Particle
 	{
-		private:
+		protected:
 			Eigen::Vector3d _pos;
 			Eigen::Vector3d _vel;
 		public:
 			Particle(Eigen::Vector3d, Eigen::Vector3d);
 			~Particle() {};
-			Eigen::Vector3d getPosition();
-			Eigen::Vector3d getVelocity();
-			void integrateTimestep(Eigen::Vector3d acceleration, double timestep);
+			Eigen::Vector3d getPosition() const;
+			Eigen::Vector3d getVelocity() const;
+			void integrateTimestep(const Eigen::Vector3d acceleration, const double& timestep);
 	};
+
+	/* PartB */
+	class MassiveParticle : public Particle
+	{
+		protected:
+			Eigen::Vector3d _acc;
+			const double _mass;
+			std::set<std::shared_ptr<MassiveParticle>> _attractorSet;
+		public:
+			MassiveParticle(Eigen::Vector3d pos, Eigen::Vector3d vel, const double& m);
+			~MassiveParticle() {};
+			void calculateAcceleration();
+			double getMu() const;
+			void addAttractor(std::shared_ptr<MassiveParticle> attractor);
+			void removeAttractor(std::shared_ptr<MassiveParticle> attractor);
+			void integrateTimestep(const double& timestep);
+	};
+
 
 } // end namespace
 
