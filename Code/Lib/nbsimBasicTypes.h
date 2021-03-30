@@ -18,6 +18,7 @@
 #include "nbsimWin32ExportHeader.h"
 #include <Eigen/Dense>
 #include <memory>
+#include <iostream>
 #include <stdlib.h>
 #include <set>
 

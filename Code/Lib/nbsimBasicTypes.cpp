@@ -33,7 +33,7 @@ namespace nbsim {
 	/* MassiveParticle */
 	MassiveParticle::MassiveParticle(Eigen::Vector3d pos, 
 									Eigen::Vector3d vel,
-									const double& m):Particle(pos, vel), _mass(m) {}
+									const double& m):Particle(pos, vel), _mass(m), _acc(0,0,0) {}
 	double MassiveParticle::getMu() const {
 		return _mass * GRAV;
 	}
@@ -45,11 +45,13 @@ namespace nbsim {
 	}
 	void MassiveParticle::calculateAcceleration() {
 		_acc << 0, 0, 0;
+			//std::cout << "acc =" << _acc << std::endl;
 		for (auto attractor : _attractorSet) {
 			Eigen::Vector3d r = this->getPosition() - attractor->getPosition();
-			_acc += -attractor->getMu() 
-				/ (r.transpose()*r)
+			_acc -= attractor->getMu() 
+				/ r.squaredNorm()
 				* r.normalized();
+			//std::cout << "acc added by " << _acc << std::endl;
 		}
 	}
 
