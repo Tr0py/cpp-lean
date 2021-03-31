@@ -82,6 +82,7 @@ namespace nbsim
 			void addAttractor(std::shared_ptr<MassiveParticle> attractor);
 			void removeAttractor(std::shared_ptr<MassiveParticle> attractor);
 			void integrateTimestep(const double& timestep);
+			double getMass() const {return _mass;}
 	};
 
 
