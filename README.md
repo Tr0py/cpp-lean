@@ -1,6 +1,8 @@
 PHAS0100Assignment2
 ------------------
 
+author: troppingz@gmail.com
+
 ## Build and Run
 
 #### Using CMAKE and MAKEFILE to compile program
